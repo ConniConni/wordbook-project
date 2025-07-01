@@ -5,7 +5,7 @@ while choice_mode != 3:
     print("1: 単語登録")
     print("2: クイズ")
     print("3: 終了")
-    choice_mode = int(input())
+    choice_mode = int(input(">>>"))
 
     if choice_mode == 1:
         print("単語登録を行います")
