@@ -1,4 +1,5 @@
 import re
+import random
 
 
 def main():
@@ -62,8 +63,11 @@ def start_quiz(word):
         print("登録された英単語がありません。英単語を登録してください")
 
     else:
-        print("==== デバック ====")
-        print(word)
+        # word_dictのキーをリストで保持し、ランダムに１つ抽出
+        all_keys = list(word.keys())
+        choice_key = random.choice(all_keys)
+        # キーに対応する日本語訳をプロンプトに表示
+        print(f"'{word[choice_key]}'を英訳して入力してください")
 
 
 def is_half_width_alpha_only(text):
