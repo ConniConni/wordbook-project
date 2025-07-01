@@ -1,7 +1,10 @@
-print("実行したい操作の番号を入力してください" "1: 単語登録" "2: クイズ" "3: 終了")
 choice_mode = 0
 
 while choice_mode != 3:
+    print("実行したい操作の番号を入力してください")
+    print("1: 単語登録")
+    print("2: クイズ")
+    print("3: 終了")
     choice_mode = int(input())
 
     if choice_mode == 1:
