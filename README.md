@@ -21,7 +21,7 @@
 <!-- READMEの作成方法のドキュメントのリンク -->
 <br />
 <div align="right">
-    <a href="READMEの作成方法のリンク"><strong>READMEの作成方法 »</strong></a>
+    <a href="READMEの作成方法のリンク"><strong>【工事中】READMEの作成方法 »</strong></a>
 </div>
 <br />
 <!-- プロジェクト名を記載 -->
@@ -41,7 +41,7 @@
   <p align="left">
     <br />
     <!-- プロジェクト詳細にBacklogのWikiのリンク -->
-    <a href="Backlogのwikiリンク"><strong>プロジェクト詳細 »</strong></a>
+    <a href="Backlogのwikiリンク"><strong>【工事中】プロジェクト詳細 »</strong></a>
     <br />
     <br />
 
