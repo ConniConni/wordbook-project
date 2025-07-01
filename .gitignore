@@ -1,0 +1,9 @@
+# Pythonの仮想環境フォルダ
+venv/
+
+# Pythonが生成するキャッシュファイル
+__pycache__/
+*.pyc
+
+# VS Codeの設定フォルダ（もし使うなら）
+.vscode/
