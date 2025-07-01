@@ -15,14 +15,22 @@ def main():
             continue
 
         if choice_mode == 1:
-            print("単語登録を行います")
+            register_word()
         elif choice_mode == 2:
-            print("クイズを行います")
+            start_quiz()
         elif choice_mode == 3:
             print("終了します")
             break
         else:
             print("有効な数字を入力してください")
+
+
+def register_word():
+    print("単語登録を行います")
+
+
+def start_quiz():
+    print("クイズを行います")
 
 
 # --- プログラムの実行開始点　---
