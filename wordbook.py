@@ -10,7 +10,7 @@ while choice_mode != 3:
         choice_mode = int(input(">>>"))
 
     except ValueError:
-        print("エラー: 半角英数字で入力してください")
+        print("エラー: 半角数字で入力してください")
         continue
 
     if choice_mode == 1:
