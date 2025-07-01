@@ -57,7 +57,13 @@ def register_word(word):
 
 
 def start_quiz(word):
-    print("クイズを行います")
+    print("=== クイズを行います ===")
+    if word == {}:
+        print("登録された英単語がありません。英単語を登録してください")
+
+    else:
+        print("==== デバック ====")
+        print(word)
 
 
 def is_half_width_alpha_only(text):
