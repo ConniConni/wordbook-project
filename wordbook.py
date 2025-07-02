@@ -8,27 +8,8 @@ CSV_FILE = "data_dict.csv"
 def main():
     """単語帳アプリケーションのメイン関数"""
     word_dict = {}
-    # CSVファイルの内容をword_dictに代入する
-    try:
-        # utf-8で読み込みモードでファイルを開く
-        with open(CSV_FILE, "r", encoding="utf-8") as f:
-            # readerオブジェクト（CSVのルールを理解して１行ずつリスト化したもの）を生成する
-            reader = csv.reader(f)
-            # ヘッダーはスキップする（next()を使ってイテレータを1行進めることで実現）
-            header = next(reader)
-            # CSVのレコードからdict_wordのキー・バリューを取得する
-            for row in reader:
-                word_dict[row[0]] = row[1]
-            print("データをCSVファイルから読み込みました")
-    # open()しようとしたCSV_FILEが存在しない場合
-    except FileNotFoundError:
-        print("CSVファイルが見つかりません 新しいCSVファイルを作成します")
-        with open(CSV_FILE, "w", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(["英単語", "日本語訳"])
-    # open()しようとしたCSV_FILEは存在するがヘッダーのみの場合
-    except StopIteration:
-        print("CSVファイルは空です")
+    # CSVファイルを読み込みword_dictに値を代入
+    load_csv_file(word_dict)
 
     while True:
         print("=== 実行したい操作の番号を入力してください ===")
@@ -107,6 +88,35 @@ def start_quiz(word):
     else:
         print("不正解です")
         print(f"正解は{choice_key}です")
+
+
+def load_csv_file(dict):
+    """
+    CSVファイルの内容を読み取る
+    データがある場合はdictに代入する
+    データがない場合はヘッダーのみを持つCSVファイルを新規作成する
+    """
+
+    try:
+        # utf-8で読み込みモードでファイルを開く
+        with open(CSV_FILE, "r", encoding="utf-8") as f:
+            # readerオブジェクト（CSVのルールを理解して１行ずつリスト化したもの）を生成する
+            reader = csv.reader(f)
+            # ヘッダーはスキップする（next()を使ってイテレータを1行進めることで実現）
+            header = next(reader)
+            # CSVのレコードからdict_wordのキー・バリューを取得する
+            for row in reader:
+                dict[row[0]] = row[1]
+            print("データをCSVファイルから読み込みました")
+    # open()しようとしたCSV_FILEが存在しない場合
+    except FileNotFoundError:
+        print("CSVファイルが見つかりません 新しいCSVファイルを作成します")
+        with open(CSV_FILE, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["英単語", "日本語訳"])
+    # open()しようとしたCSV_FILEは存在するがヘッダーのみの場合
+    except StopIteration:
+        print("CSVファイルは空です")
 
 
 def is_half_width_alpha_only(text):
