@@ -61,6 +61,7 @@ def start_quiz(word):
     print("=== クイズを行います ===")
     if word == {}:
         print("登録された英単語がありません。英単語を登録してください")
+        return
 
     else:
         # word_dictのキーをリストで保持し、ランダムに１つ抽出
