@@ -22,7 +22,10 @@ def main():
             print("データをCSVファイルから読み込みました")
     # open()しようとしたCSV_FILEが存在しない場合
     except FileNotFoundError:
-        print("CSVファイルが見つかりません")
+        print("CSVファイルが見つかりません 新しいCSVファイルを作成します")
+        with open(CSV_FILE, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["英単語", "日本語訳"])
     # open()しようとしたCSV_FILEは存在するがヘッダーのみの場合
     except StopIteration:
         print("CSVファイルは空です")
