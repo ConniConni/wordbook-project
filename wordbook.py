@@ -7,9 +7,8 @@ CSV_FILE = "data_dict.csv"
 
 def main():
     """単語帳アプリケーションのメイン関数"""
-    word_dict = {}
-    # CSVファイルを読み込みword_dictに値を代入
-    load_csv_file(word_dict)
+    # CSVファイルを読み込み辞書型のリストword_dictを生成する
+    word_dict = load_csv_file()
 
     while True:
         print("=== 実行したい操作の番号を入力してください ===")
@@ -90,12 +89,15 @@ def start_quiz(word):
         print(f"正解は{choice_key}です")
 
 
-def load_csv_file(dict):
+def load_csv_file():
     """
     CSVファイルの内容を読み取る
     データがある場合はdictに代入する
     データがない場合はヘッダーのみを持つCSVファイルを新規作成する
     """
+
+    # 空の辞書を定義
+    word_dict = {}
 
     try:
         # utf-8で読み込みモードでファイルを開く
@@ -106,17 +108,22 @@ def load_csv_file(dict):
             header = next(reader)
             # CSVのレコードからdict_wordのキー・バリューを取得する
             for row in reader:
-                dict[row[0]] = row[1]
+                word_dict[row[0]] = row[1]
             print("データをCSVファイルから読み込みました")
+
     # open()しようとしたCSV_FILEが存在しない場合
     except FileNotFoundError:
         print("CSVファイルが見つかりません 新しいCSVファイルを作成します")
+        # CSVファイルを新規作成（中身はヘッダーのみ）
         with open(CSV_FILE, "w", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow(["英単語", "日本語訳"])
+
     # open()しようとしたCSV_FILEは存在するがヘッダーのみの場合
     except StopIteration:
         print("CSVファイルは空です")
+
+    return word_dict
 
 
 def is_half_width_alpha_only(text):
