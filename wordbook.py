@@ -67,11 +67,16 @@ def start_quiz(word):
         # word_dictのキーをリストで保持し、ランダムに１つ抽出
         all_keys = list(word.keys())
         choice_key = random.choice(all_keys)
-        # キーに対応する日本語訳をプロンプトに表示
+
+    # キーに対応する日本語訳をプロンプトに表示し、ユーザーに英単語の入力を求める
+    # 入力は半角英字のみを許可する
+    while True:
         print(f"'{word[choice_key]}'を英訳して入力してください")
         answer_eg_word = input("<<< ")
-        print("#### デバック ####")
-        print(answer_eg_word)
+        if is_half_width_alpha_only(answer_eg_word):
+            break
+        else:
+            print("エラー: 英訳は半角英字のみで入力してください")
 
 
 def is_half_width_alpha_only(text):
