@@ -59,14 +59,13 @@ def register_word(word):
 
 def start_quiz(word):
     print("=== クイズを行います ===")
-    if word == {}:
+    if not word:
         print("登録された英単語がありません。英単語を登録してください")
         return
 
-    else:
-        # word_dictのキーをリストで保持し、ランダムに１つ抽出
-        all_keys = list(word.keys())
-        choice_key = random.choice(all_keys)
+    # word_dictのキーをリストで保持し、ランダムに１つ抽出
+    all_keys = list(word.keys())
+    choice_key = random.choice(all_keys)
 
     # キーに対応する日本語訳をプロンプトに表示し、ユーザーに英単語の入力を求める
     # 入力は半角英字のみを許可する
