@@ -72,7 +72,7 @@ def start_quiz(word):
     # 入力は半角英字のみを許可する
     while True:
         print(f"'{word[choice_key]}'を英訳して入力してください")
-        answer_eg_word = input("<<< ")
+        answer_eg_word = input(">>> ")
         if is_half_width_alpha_only(answer_eg_word):
             break
         else:
