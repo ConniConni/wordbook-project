@@ -78,6 +78,13 @@ def start_quiz(word):
         else:
             print("エラー: 英訳は半角英字のみで入力してください")
 
+    # ユーザーの回答とword_dictのキーを比較し、正誤判定を行う
+    if answer_eg_word == choice_key:
+        print("正解です！")
+    else:
+        print("不正解です")
+        print(f"正解は{choice_key}です")
+
 
 def is_half_width_alpha_only(text):
     """
