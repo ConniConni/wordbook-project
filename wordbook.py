@@ -135,7 +135,7 @@ def save_data_to_csv_file(word_dict):
     現在の辞書全体を、CSVファイルに丸ごと上書き保存する
     """
 
-    with open(CSV_FILE, "w", encoding="utf-8") as f:
+    with open(CSV_FILE, "w", encoding="utf-8", newline="") as f:
         # writerオブジェクトを生成する（書き込み処理が可能になる）
         writer = csv.writer(f)
         # ヘッダーを挿入する
