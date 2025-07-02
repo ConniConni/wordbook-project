@@ -1,4 +1,5 @@
 import re
+import random
 
 
 def main():
@@ -57,7 +58,31 @@ def register_word(word):
 
 
 def start_quiz(word):
-    print("クイズを行います")
+    print("=== クイズを行います ===")
+    if not word:
+        print("登録された英単語がありません。英単語を登録してください")
+        return
+
+    # word_dictのキーをリストで保持し、ランダムに１つ抽出
+    all_keys = list(word.keys())
+    choice_key = random.choice(all_keys)
+
+    # キーに対応する日本語訳をプロンプトに表示し、ユーザーに英単語の入力を求める
+    # 入力は半角英字のみを許可する
+    while True:
+        print(f"'{word[choice_key]}'を英訳して入力してください")
+        answer_eg_word = input(">>> ")
+        if is_half_width_alpha_only(answer_eg_word):
+            break
+        else:
+            print("エラー: 英訳は半角英字のみで入力してください")
+
+    # ユーザーの回答とword_dictのキーを比較し、正誤判定を行う
+    if answer_eg_word == choice_key:
+        print("正解です！")
+    else:
+        print("不正解です")
+        print(f"正解は{choice_key}です")
 
 
 def is_half_width_alpha_only(text):
