@@ -69,6 +69,9 @@ def start_quiz(word):
         choice_key = random.choice(all_keys)
         # キーに対応する日本語訳をプロンプトに表示
         print(f"'{word[choice_key]}'を英訳して入力してください")
+        answer_eg_word = input("<<< ")
+        print("#### デバック ####")
+        print(answer_eg_word)
 
 
 def is_half_width_alpha_only(text):
