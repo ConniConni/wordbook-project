@@ -7,3 +7,6 @@ __pycache__/
 
 # VS Codeの設定フォルダ（もし使うなら）
 .vscode/
+
+# 単語帳データの保存・読み込みを行うCSVファイル
+data_dict.csv

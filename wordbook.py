@@ -1,10 +1,14 @@
 import re
 import random
+import csv
+
+CSV_FILE = "data_dict.csv"
 
 
 def main():
     """単語帳アプリケーションのメイン関数"""
-    word_dict = {}
+    # CSVファイルを読み込み辞書型のリストword_dictを生成する
+    word_dict = load_csv_file()
 
     while True:
         print("=== 実行したい操作の番号を入力してください ===")
@@ -30,7 +34,7 @@ def main():
             print("有効な数字を入力してください")
 
 
-def register_word(word):
+def register_word(word_dict):
     print("=== 単語登録を行います ===")
 
     while True:
@@ -50,27 +54,29 @@ def register_word(word):
         else:
             print("エラー: 日本語訳は 漢字・ひらがな・カタカナで入力してください")
 
-    word[input_eg_word] = translation_jp_word
+    word_dict[input_eg_word] = translation_jp_word
+
+    save_data_to_csv_file(word_dict)
 
     print("以下の英単語と日本語訳を保存しました")
     print(f"英単語: {input_eg_word}")
     print(f"日本語訳: {translation_jp_word}")
 
 
-def start_quiz(word):
+def start_quiz(word_dict):
     print("=== クイズを行います ===")
-    if not word:
+    if not word_dict:
         print("登録された英単語がありません。英単語を登録してください")
         return
 
     # word_dictのキーをリストで保持し、ランダムに１つ抽出
-    all_keys = list(word.keys())
+    all_keys = list(word_dict.keys())
     choice_key = random.choice(all_keys)
 
     # キーに対応する日本語訳をプロンプトに表示し、ユーザーに英単語の入力を求める
     # 入力は半角英字のみを許可する
     while True:
-        print(f"'{word[choice_key]}'を英訳して入力してください")
+        print(f"'{word_dict[choice_key]}'を英訳して入力してください")
         answer_eg_word = input(">>> ")
         if is_half_width_alpha_only(answer_eg_word):
             break
@@ -83,6 +89,60 @@ def start_quiz(word):
     else:
         print("不正解です")
         print(f"正解は{choice_key}です")
+
+
+def load_csv_file():
+    """
+    CSVファイルの内容を読み取る
+    データがある場合はdictに代入する
+    データがない場合はヘッダーのみを持つCSVファイルを新規作成する
+    """
+
+    # 空の辞書を定義
+    word_dict = {}
+
+    try:
+        # utf-8で読み込みモードでファイルを開く
+        with open(CSV_FILE, "r", encoding="utf-8") as f:
+            # readerオブジェクト（CSVのルールを理解して１行ずつリスト化したもの）を生成する
+            reader = csv.reader(f)
+            # ヘッダーはスキップする（next()を使ってイテレータを1行進めることで実現）
+            header = next(reader)
+            # CSVのレコードからdict_wordのキー・バリューを取得する
+            for row in reader:
+                word_dict[row[0]] = row[1]
+            print("データをCSVファイルから読み込みました")
+
+    # open()しようとしたCSV_FILEが存在しない場合
+    except FileNotFoundError:
+        print("CSVファイルが見つかりません 新しいCSVファイルを作成します")
+        # CSVファイルを新規作成（中身はヘッダーのみ）
+        with open(CSV_FILE, "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["英単語", "日本語訳"])
+
+    # open()しようとしたCSV_FILEは存在するがヘッダーのみの場合
+    except StopIteration:
+        print("CSVファイルは空です")
+
+    return word_dict
+
+
+def save_data_to_csv_file(word_dict):
+    """
+    登録された単語をCSVに保存する
+    関数が呼び出される度に、CSVファイルにヘッダーを書き込む
+    現在の辞書全体を、CSVファイルに丸ごと上書き保存する
+    """
+
+    with open(CSV_FILE, "w", encoding="utf-8", newline="") as f:
+        # writerオブジェクトを生成する（書き込み処理が可能になる）
+        writer = csv.writer(f)
+        # ヘッダーを挿入する
+        writer.writerow(["英単語", "日本語訳"])
+        # 辞書のキー・バリューを取り出し、CSVのレコードとして書き込む
+        for eg_word, jp_word in word_dict.items():
+            writer.writerow([eg_word, jp_word])
 
 
 def is_half_width_alpha_only(text):
