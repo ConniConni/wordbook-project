@@ -1,4 +1,5 @@
 import random
+
 from .utils.file_handler import save_data_to_csv_file
 from .utils.validators import is_half_width_alpha_only
 from .utils.validators import is_japanese_char_only
