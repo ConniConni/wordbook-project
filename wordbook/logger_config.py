@@ -7,7 +7,7 @@ def setup_logging():
     # ルートロガーを生成
     logger = logging.getLogger()
     # ルートロガーにログレベルを設定
-    logger.setLevel(logging.WARNING)
+    logger.setLevel(logging.INFO)
     # フォーマッタを設定
     formatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
