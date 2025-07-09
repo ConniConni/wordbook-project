@@ -27,6 +27,7 @@ def run_app():
             choice_mode = int(input(">>> "))
 
         except ValueError:
+            logger.warning("無効な入力です: 整数以外が入力されました。")
             print("エラー: 半角数字で入力してください")
             continue
 
@@ -39,4 +40,5 @@ def run_app():
             logger.info("アプリケーションを終了")
             break
         else:
+            logger.warning("無効な入力です: 選択肢以外の整数が入力されました。")
             print("有効な数字を入力してください")
