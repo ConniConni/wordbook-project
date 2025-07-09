@@ -1,10 +1,19 @@
+import logging
+
 from .utils.file_handler import load_csv_file
 from .core import register_word
 from .core import start_quiz
 
 
+# ロガーを生成する
+logger = logging.getLogger(__name__)
+
+
 def run_app():
     """単語帳アプリケーションのメイン関数"""
+
+    logger.info("アプリケーションを開始")
+
     # CSVファイルを読み込み辞書型のリストword_dictを生成する
     word_dict = load_csv_file()
 
@@ -27,6 +36,7 @@ def run_app():
             start_quiz(word_dict)
         elif choice_mode == 3:
             print("終了します")
+            logger.info("アプリケーションを終了")
             break
         else:
             print("有効な数字を入力してください")
