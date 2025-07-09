@@ -38,6 +38,9 @@ def register_word(word_dict):
 
     save_data_to_csv_file(word_dict)
 
+    logger.info(
+        f"英単語: '{input_eg_word}', 日本語訳: '{translation_jp_word}' を登録しました。"
+    )
     print("以下の英単語と日本語訳を保存しました")
     print(f"英単語: {input_eg_word}")
     print(f"日本語訳: {translation_jp_word}")
@@ -67,7 +70,9 @@ def start_quiz(word_dict):
 
     # ユーザーの回答とword_dictのキーを比較し、正誤判定を行う
     if answer_eg_word == choice_key:
+        logger.info(f"正解です: 回答 '{answer_eg_word}'")
         print("正解です！")
     else:
+        logger.info(f"不正解です: 回答 '{answer_eg_word}'")
         print("不正解です")
         print(f"正解は{choice_key}です")
